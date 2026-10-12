@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Student Dashboard | UBDT College</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fa;
+            color: #263238;
+        }
+
+        header {
+            background: #17365d;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h2,
+        header p {
+            margin: 5px 0;
+        }
+
+        .logout-button {
+            padding: 10px 18px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout-button:hover {
+            background: #b52a37;
+        }
+
+        main {
+            max-width: 750px;
+            margin: 35px auto;
+            padding: 0 18px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            color: #17365d;
+            margin-top: 0;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .detail {
+            padding: 17px 0;
+            border-bottom: 1px solid #e7eaf0;
+        }
+
+        .label {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .value {
+            font-size: 17px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .notice {
+            margin-top: 25px;
+            padding: 15px;
+            background: #eef4fc;
+            border-radius: 7px;
+            color: #17365d;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 18px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h2>UBDT College</h2>
+            <p>Student Portal</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('student_logout') }}">
+            <button class="logout-button" type="submit">
+                Logout
+            </button>
+        </form>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Welcome, {{ student["name"] }}!</h2>
+
+            <p class="description">
+                You are logged in to your student account.
+                Here are your registered details.
+            </p>
+
+            <div class="detail">
+                <span class="label">Student ID</span>
+                <span class="value">{{ student["id"] }}</span>
+            </div>
+
+            <div class="detail">
+                <span class="label">Student Name</span>
+                <span class="value">{{ student["name"] }}</span>
+            </div>
+
+            <div class="detail">
+                <span class="label">Age</span>
+                <span class="value">{{ student["age"] }}</span>
+            </div>
+
+            <div class="detail">
+                <span class="label">Course</span>
+                <span class="value">{{ student["course"] }}</span>
+            </div>
+
+            <div class="notice">
+                <strong>Need to correct your details?</strong>
+                <br>
+                Please contact your college administrator.
+                Students cannot modify or delete records through this portal.
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        UBDT College Student Management System
+    </footer>
+</body>
+</html>

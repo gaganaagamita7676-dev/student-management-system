@@ -1,0 +1,358 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | UBDT College</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(45, 108, 180, 0.25),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(13, 148, 136, 0.18),
+                    transparent 35%
+                ),
+                linear-gradient(135deg, #07172e, #102d50 55%, #123b55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background circles */
+        .shape {
+            position: fixed;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .shape-one {
+            width: 350px;
+            height: 350px;
+            top: -120px;
+            right: -90px;
+        }
+
+        .shape-two {
+            width: 250px;
+            height: 250px;
+            bottom: -100px;
+            left: -60px;
+        }
+
+        .shape-three {
+            width: 120px;
+            height: 120px;
+            top: 15%;
+            left: 12%;
+            border-color: rgba(94, 234, 212, 0.12);
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .college-heading {
+            text-align: center;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .college-logo {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            font-size: 32px;
+        }
+
+        .college-heading h1 {
+            font-size: 23px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+        }
+
+        .college-heading p {
+            color: #b8c9dd;
+            font-size: 14px;
+        }
+
+        .login-card {
+            background: #ffffff;
+            padding: 38px;
+            border-radius: 18px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-title {
+            color: #102d50;
+            font-size: 27px;
+            margin-bottom: 9px;
+        }
+
+        .login-description {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #26384d;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #718096;
+        }
+
+        input {
+            width: 100%;
+            height: 48px;
+            padding: 12px 14px 12px 43px;
+            border: 1px solid #d9e2ec;
+            border-radius: 9px;
+            background: #f8fafc;
+            color: #1e293b;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: #0f9b8e;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(15, 155, 142, 0.12);
+        }
+
+        input::placeholder {
+            color: #a0aec0;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 49px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #0f766e, #11998e);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.25);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #b91c1c;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .security-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            margin-top: 22px;
+            color: #7b8798;
+            font-size: 12px;
+        }
+
+        .security-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #0f9b8e;
+        }
+
+        .page-footer {
+            margin-top: 23px;
+            text-align: center;
+            color: #9fb1c7;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .login-card {
+                padding: 27px 22px;
+            }
+
+            .college-heading h1 {
+                font-size: 20px;
+            }
+
+            .login-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Decorative background shapes -->
+    <div class="shape shape-one"></div>
+    <div class="shape shape-two"></div>
+    <div class="shape shape-three"></div>
+
+    <main class="login-container">
+
+        <!-- College heading -->
+        <div class="college-heading">
+            <div class="college-logo">🎓</div>
+
+            <h1>UBDT College of Engineering</h1>
+
+            <p>Student Management Portal</p>
+        </div>
+
+        <!-- Login card -->
+        <section class="login-card">
+
+            <h2 class="login-title">Welcome Back</h2>
+
+            <p class="login-description">
+                Sign in with your administrator account
+                to manage student records and view dashboard statistics.
+            </p>
+
+            <form action="{{ url_for('login') }}" method="POST">
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username">Username</label>
+
+                    <div class="input-wrapper">
+                        <span class="input-icon" aria-hidden="true">
+                            &#128100;
+                        </span>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                            autofocus>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <div class="input-wrapper">
+                        <span class="input-icon" aria-hidden="true">
+                            &#128274;
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+                    </div>
+                </div>
+
+                <!-- Login button -->
+                <button type="submit" class="login-button">
+                    Sign In to Dashboard &rarr;
+                </button>
+
+            </form>
+
+            <!-- Flask flash messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="security-note">
+                <span class="security-dot"></span>
+                Administrator access
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>UBDT College of Engineering</p>
+            <p>Student Management System &copy; 2026</p>
+        </footer>
+
+    </main>
+
+</body>
+</html>

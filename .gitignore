@@ -1,0 +1,12 @@
+
+__pycache__/
+*.pyc
+venv/
+.venv/
+student.db
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+.vscode/
